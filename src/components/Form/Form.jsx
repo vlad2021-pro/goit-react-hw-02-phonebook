@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BtnSubmit, FormAddContact, ContactInput } from "./Form.styled";
 
 class Form extends Component {
   state = {
@@ -12,8 +13,6 @@ class Form extends Component {
 
   handleSubbmit = (e) => {
     e.preventDefault();
-
-    this.props.onSubmit(this.state);
 
     if (
       this.props.contacts.find((contact) => contact.name === this.state.name)
@@ -38,11 +37,11 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubbmit}>
+        <FormAddContact onSubmit={this.handleSubbmit}>
           <label>
             {" "}
             Name
-            <input
+            <ContactInput
               type="text"
               name="name"
               value={this.state.name}
@@ -56,7 +55,7 @@ class Form extends Component {
           <label>
             {" "}
             Number
-            <input
+            <ContactInput
               type="tel"
               name="number"
               value={this.state.number}
@@ -67,8 +66,8 @@ class Form extends Component {
             />
           </label>
 
-          <button type="submit">Add contact</button>
-        </form>
+          <BtnSubmit type="submit">Add contact</BtnSubmit>
+        </FormAddContact>
       </div>
     );
   }

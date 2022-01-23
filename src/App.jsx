@@ -1,8 +1,8 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import Form from "./components/Form/Form";
-import ContactsList from "./components/Contacts/Contacts";
-import Filter from "./components/Filter/filter";
+import Form from "./components/Form/";
+import ContactsList from "./components/Contacts";
+import Filter from "./components/Filter";
 
 class App extends React.Component {
   state = {
@@ -37,7 +37,7 @@ class App extends React.Component {
     const { filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
-    return this.state.contacts?.filter((contact) =>
+    return this.state.contacts.filter((contact) =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
@@ -48,8 +48,9 @@ class App extends React.Component {
 
     return (
       <div>
-        <Form onSubmit={this.addContacts} />
+        <Form onSubmit={this.addContacts} contacts={this.state.contacts} />
         <h2>Contacts</h2>
+        <h2>Find by contacts by name</h2>
         <Filter filter={filter} onChange={this.changeInputFilter} />
         <ContactsList contacts={visibleContacts} />
       </div>
