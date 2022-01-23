@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class Form extends Component {
   state = {
-    contacts: [],
     name: "",
     number: "",
   };
@@ -16,6 +15,15 @@ class Form extends Component {
 
     this.props.onSubmit(this.state);
 
+    if (
+      this.props.contacts.find((contact) => contact.name === this.state.name)
+    ) {
+      alert(`${this.state.name} is already in contacts`);
+    } else {
+      this.props.onSubmit(this.state);
+      this.reset();
+    }
+
     this.reset();
   };
 
@@ -24,7 +32,7 @@ class Form extends Component {
   };
 
   reset = () => {
-    this.setState({ name: "" });
+    this.setState({ name: "", number: "" });
   };
 
   render() {

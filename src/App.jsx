@@ -1,21 +1,14 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import Form from "./Form/Form";
+import Form from "./components/Form/Form";
+import ContactsList from "./components/Contacts/Contacts";
+import Filter from "./components/Filter/filter";
 
 class App extends React.Component {
   state = {
-    contacts: [
-      {
-        name: "",
-        id: "",
-      },
-    ],
-
-    name: "",
+    contacts: [],
+    filter: "",
   };
-
-  hadleContactsName = nanoid();
-  hadleContactsId = nanoid();
 
   addContacts = ({ name, number }) => {
     const userContact = {
@@ -23,32 +16,42 @@ class App extends React.Component {
       name,
       number,
     };
+
+    this.setState((prevState) => ({
+      contacts: [userContact, ...prevState.contacts],
+    }));
+
     console.log(userContact);
   };
 
+  changeFilter = (e) => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  changeInputFilter = (e) => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value });
+  };
+
+  getVisibleContacts = () => {
+    const { filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return this.state.contacts?.filter((contact) =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   render() {
+    const visibleContacts = this.getVisibleContacts();
+    const { filter } = this.state;
+
     return (
       <div>
-        <Form onSumbit={this.addContacts}></Form>
-
-        <div>
-          <ul>
-            {" "}
-            Contacts
-            <li name={this.hadleContactsName} id={this.hadleContactsId}>
-              Jon Benn
-            </li>
-            <li name={this.hadleContactsName} id={this.hadleContactsId}>
-              Eden Klinec
-            </li>
-            <li name={this.hadleContactsName} id={this.hadleContactsId}>
-              Tom Hardy
-            </li>
-            <li name={this.hadleContactsName} id={this.hadleContactsId}>
-              Lee Kun
-            </li>
-          </ul>
-        </div>
+        <Form onSubmit={this.addContacts} />
+        <h2>Contacts</h2>
+        <Filter filter={filter} onChange={this.changeInputFilter} />
+        <ContactsList contacts={visibleContacts} />
       </div>
     );
   }
