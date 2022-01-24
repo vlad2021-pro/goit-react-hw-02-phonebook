@@ -3,14 +3,14 @@ import styled from "@emotion/styled";
 const color = "blue";
 
 export const FormAddContact = styled.form`
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 6em;
+  padding: 7px;
+  color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: auto;
+  width: 200px;
 `;
-export const ContactInput = styled.input`
-  cursor: pointer;
-`;
+export const ContactInput = styled.input``;
 
 export const BtnSubmit = styled.button`
   width: 70px;

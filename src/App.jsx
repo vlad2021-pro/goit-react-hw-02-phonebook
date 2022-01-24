@@ -20,8 +20,15 @@ class App extends React.Component {
     this.setState((prevState) => ({
       contacts: [userContact, ...prevState.contacts],
     }));
+  };
 
-    console.log(userContact);
+  deleteContact = (contactId) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter(
+        (contact) => contact.id !== contactId
+      ),
+    }));
+    // console.log(contactId)
   };
 
   changeFilter = (e) => {
@@ -50,9 +57,11 @@ class App extends React.Component {
       <div>
         <Form onSubmit={this.addContacts} contacts={this.state.contacts} />
         <h2>Contacts</h2>
-        <h2>Find by contacts by name</h2>
         <Filter filter={filter} onChange={this.changeInputFilter} />
-        <ContactsList contacts={visibleContacts} />
+        <ContactsList
+          contacts={visibleContacts}
+          deleteContatcs={this.deleteContact}
+        />
       </div>
     );
   }

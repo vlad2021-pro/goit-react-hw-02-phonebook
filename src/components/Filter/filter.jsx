@@ -1,12 +1,19 @@
 import React from "react";
+import { HeaderFilter, FilterInput, FilterLabel } from "./Filter.styled";
 
 const Filter = ({ filter, onChange }) => {
   return (
     <div>
-      <label>
-        {" "}
-        <input name="filter" type="text" value={filter} onChange={onChange} />
-      </label>
+      <HeaderFilter>Find contacts by name</HeaderFilter>
+
+      <FilterLabel>
+        <FilterInput
+          name="filter"
+          type="text"
+          value={filter}
+          onChange={onChange}
+        />
+      </FilterLabel>
     </div>
   );
 };
