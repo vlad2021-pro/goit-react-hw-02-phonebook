@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+const color = "blue";
+
 export const ContactList = styled.div`
   padding: 7px;
   color: black;
@@ -9,7 +11,10 @@ export const ContactList = styled.div`
   list-style-type: none;
 `;
 
-export const ContactItem = styled.li``;
+export const ContactItem = styled.li`
+  display: flex;
+  align-items: center;
+`;
 
 export const ContactData = styled.p`
   display: inline-block;
@@ -24,9 +29,18 @@ export const ContactData = styled.p`
 `;
 
 export const ContactButton = styled.button`
-  display: inline-block;
-  margin-bottom: 10px;
-  vertical-align: top;
+  margin-left: 10px;
+  margin-top: 8px;
+  width: 100px;
+  
   text-align: center;
-  line-height: normal;
+  background-color: white;
+  color: black;
+  font-size: 10px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px 1px #a9a9a9;
+  &:hover {
+    color: white;
+    background-color: ${color};
+    cursor: pointer;
 `;
